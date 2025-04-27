@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import { useStateContext } from "../context/ContextProvider";
+import axiosClient from "../axiosClient";
 function DefaultLayout() {
-    const { user, token, setToken } = useStateContext();
+    const { user, token, setToken, setUser } = useStateContext();
 
     //* Checks if the user is authenticated
     //* If not authenticated redirect the user to the login page
@@ -12,11 +13,17 @@ function DefaultLayout() {
     }
     const onLogout = (e) => {
         e.preventDefault();
-
-        localStorage.removeItem("ACCESS_TOKEN");
-        setToken(localStorage.getItem("ACCESS_TOKEN"));
-        return <Navigate to={"/login"} />;
+        axiosClient
+            .get("/logout")
+            .then(() => {
+                setUser(null);
+                setToken(null);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
+
     return (
         <div id="defaultLayout">
             <div className="content">
