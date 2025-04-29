@@ -16,6 +16,7 @@ axiosClient.interceptors.request.use((config) => {
 //*Captures the response  and passes it through to the application
 axiosClient.interceptors.response.use(
     (response) => {
+        console.log(response);
         return response;
     },
     //*catches errors

@@ -13,13 +13,12 @@ function Register() {
             email: emailRef.current.value,
             password: passwordRef.current.value,
         };
-
+            
         axiosClient
             .post("/register", payLoad)
             .then(({ data }) => {
                 const { name } = data.user;
 
-                console.log(data);
                 setUser(data.user);
                 setToken(data.token);
                 showAlertMessage(name);
