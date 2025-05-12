@@ -12,6 +12,8 @@ class UserResource extends JsonResource
      *
      * @return array<string, mixed>
      */
+
+ 
     public function toArray(Request $request): array
     {
         //*Customizing the json response and their formatting

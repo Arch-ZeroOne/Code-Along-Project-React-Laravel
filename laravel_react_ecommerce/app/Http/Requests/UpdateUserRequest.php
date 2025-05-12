@@ -22,9 +22,11 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules(): array
     {
+   //This caused errors in the email part where i didnt use string interpolation
+   //  'email' => 'required|email|unique:users,email,'.$this -> id,
         return [
            'name' => 'required|max:255|string',
-            'email' => 'required|email|unique:users|email',$this -> id,
+            'email' => 'required|email|unique:users,email,'.$this -> id,
             'password' => ['required',
                 Password:: min(0) -> letters() 
             ]

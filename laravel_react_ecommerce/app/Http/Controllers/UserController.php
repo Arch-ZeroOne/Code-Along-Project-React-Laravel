@@ -34,7 +34,7 @@ class UserController extends Controller
         $user =  User::create($data); 
         //201 - means the resource has been created
         //Transforms the response into JSON by the UserResource class instance
-        return response(new UserResource($user),201);
+        return response([new UserResource($user),201]);
     }
 
     /**
@@ -42,7 +42,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return response(new UserResource($user));
+        return response([new UserResource($user)]);
     }
 
    
@@ -55,8 +55,8 @@ class UserController extends Controller
         $data = $request -> validated();
 
         //*Returns false if the data doesnt have a password
-        if(isset($data['password'])){
-            $data['password'] = bcrypt($data['password']);
+        if(!isset($data['password'])){
+        $data['password'] = bcrypt($data['password']);
 
         }
         $user -> update($data);
