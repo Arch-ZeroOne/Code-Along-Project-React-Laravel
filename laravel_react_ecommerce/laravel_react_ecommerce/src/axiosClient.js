@@ -16,17 +16,10 @@ axiosClient.interceptors.request.use((config) => {
 //*Captures the response  and passes it through to the application
 axiosClient.interceptors.response.use(
     (response) => {
-         console.log("Response has been sent:");
-         console.log(response)
-         console.log("-+++++++++++++++++++++++++-");
         return response;
     },
     //*catches errors
     (error) => {
-        console.log("Response failed:");
-        //*destructures the response key from error
-        console.log(error);
-        console.log("-+++++++++++++++++++++++++-");
         const { response } = error;
         //*catches the response status to help use handle errors
         if (response.status === 401) {
